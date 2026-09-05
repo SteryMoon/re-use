@@ -2,11 +2,17 @@
   "name": "re-use",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
+    "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "studio": "prisma studio",
+    "migrate": "prisma migrate dev",
+    "seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",

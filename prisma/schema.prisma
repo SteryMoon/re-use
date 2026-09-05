@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  avatar    String?
+  bio       String?
+  cidade    String?
+  criadoEm  DateTime @default(now())
+
+  itens              Item[]
+  stories            Story[]
+  favoritos          Favorito[]
+  propostasFeitas    Proposta[] @relation("Solicitante")
+  propostasRecebidas Proposta[] @relation("Dono")
+  conversasA         Conversa[] @relation("UsuarioA")
+  conversasB         Conversa[] @relation("UsuarioB")
+  mensagens          Mensagem[]
+}
+
+model Categoria {
+  id    Int     @id @default(autoincrement())
+  nome  String  @unique
+  icone String?
+
+  itens Item[]
+}
+
+model Item {
+  id        Int      @id @default(autoincrement())
+  titulo    String
+  descricao String
+  imagem    String
+  condicao  String
+  status    String   @default("disponivel")
+  criadoEm  DateTime @default(now())
+
+  donoId      Int
+  dono        Usuario   @relation(fields: [donoId], references: [id])
+  categoriaId Int
+  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+
+  favoritos  Favorito[]
+  ofertadoEm Proposta[] @relation("ItemOferecido")
+  desejadoEm Proposta[] @relation("ItemDesejado")
+}
+
+model Story {
+  id       Int      @id @default(autoincrement())
+  imagem   String
+  texto    String?
+  criadoEm DateTime @default(now())
+  expiraEm DateTime
+
+  autorId Int
+  autor   Usuario @relation(fields: [autorId], references: [id])
+}
+
+model Proposta {
+  id       Int      @id @default(autoincrement())
+  status   String   @default("pendente")
+  criadoEm DateTime @default(now())
+
+  itemOferecidoId Int
+  itemOferecido   Item @relation("ItemOferecido", fields: [itemOferecidoId], references: [id])
+  itemDesejadoId  Int
+  itemDesejado    Item @relation("ItemDesejado", fields: [itemDesejadoId], references: [id])
+
+  solicitanteId Int
+  solicitante   Usuario @relation("Solicitante", fields: [solicitanteId], references: [id])
+  donoId        Int
+  dono          Usuario @relation("Dono", fields: [donoId], references: [id])
+}
+
+model Conversa {
+  id       Int      @id @default(autoincrement())
+  criadoEm DateTime @default(now())
+
+  usuarioAId Int
+  usuarioA   Usuario @relation("UsuarioA", fields: [usuarioAId], references: [id])
+  usuarioBId Int
+  usuarioB   Usuario @relation("UsuarioB", fields: [usuarioBId], references: [id])
+
+  mensagens Mensagem[]
+
+  @@unique([usuarioAId, usuarioBId])
+}
+
+model Mensagem {
+  id       Int      @id @default(autoincrement())
+  conteudo String
+  criadoEm DateTime @default(now())
+  lida     Boolean  @default(false)
+
+  conversaId Int
+  conversa   Conversa @relation(fields: [conversaId], references: [id])
+  autorId    Int
+  autor      Usuario  @relation(fields: [autorId], references: [id])
+}
+
+model Favorito {
+  id Int @id @default(autoincrement())
+
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+  itemId    Int
+  item      Item    @relation(fields: [itemId], references: [id])
+
+  @@unique([usuarioId, itemId])
+}
