@@ -7,9 +7,12 @@ import LinhaStories from "@/components/LinhaStories";
 import Categorias from "@/components/Categorias";
 import CardItem from "@/components/CardItem";
 
-export default async function Vitrine() {
+export default async function Vitrine({ searchParams }) {
     const usuario = await usuarioLogado();
     if (!usuario) redirect("/login");
+
+    const params = await searchParams;
+    const categoriaAtiva = params?.categoria ? Number(params.categoria) : null;
 
     const [stories, categorias, itens] = await Promise.all([
         prisma.story.findMany({
@@ -19,15 +22,22 @@ export default async function Vitrine() {
         }),
         prisma.categoria.findMany({ orderBy: { nome: "asc" } }),
         prisma.item.findMany({
-            where: { status: "disponivel" },
+            where: {
+                status: "disponivel",
+                ...(categoriaAtiva && { categoriaId: categoriaAtiva }),
+            },
             include: { categoria: true },
             orderBy: { criadoEm: "desc" },
         }),
     ]);
 
+    const nomeCategoria = categoriaAtiva
+        ? categorias.find((c) => c.id === categoriaAtiva)?.nome
+        : null;
+
     return (
         <>
-            <main className="mx-auto max-w-md px-5 pt-8 pb-24 md:max-w-none md:px-12 md:pt-28 md:pb-16">
+            <main className="mx-auto max-w-md px-5 pt-8 pb-24 md:max-w-none md:px-12 md:pt-36 md:pb-16">
                 <header className="mb-6 flex items-center justify-between md:mb-10">
                     <div>
                         <p className="text-sm text-cinza md:text-base">Olá,</p>
@@ -49,23 +59,27 @@ export default async function Vitrine() {
                 </header>
 
                 <LinhaStories stories={stories} />
-                <Categorias categorias={categorias} />
+                <Categorias categorias={categorias} ativa={categoriaAtiva} />
 
                 <section>
-                    <h2 className="mb-3 font-semibold md:mb-5 md:text-xl">Disponíveis para troca</h2>
+                    <h2 className="mb-3 font-semibold md:mb-5 md:text-xl">
+                        {nomeCategoria ? `Categoria: ${nomeCategoria}` : "Disponíveis para troca"}
+                    </h2>
                     {itens.length === 0 ? (
-                        <p className="text-sm text-cinza">
-                            Nenhum item ainda. Rode o seed para popular o banco.
+                        <p className="py-16 text-center text-sm text-cinza md:py-32 md:text-lg">
+                            Nenhum item nesta categoria ainda.
                         </p>
                     ) : (
-                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">                            {itens.map((item) => (
-                            <CardItem key={item.id} item={item} />
-                        ))}
+                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 md:gap-6">
+                            {itens.map((item) => (
+                                <CardItem key={item.id} item={item} />
+                            ))}
                         </div>
                     )}
                 </section>
             </main>
 
-            <TabBar usuario={usuario} />        </>
+            <TabBar usuario={usuario} />
+        </>
     );
 }
