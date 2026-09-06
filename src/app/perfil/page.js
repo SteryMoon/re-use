@@ -23,34 +23,34 @@ export default async function Perfil() {
 
     return (
         <>
-            <main className="mx-auto max-w-md px-5 pt-10 pb-24">
+            <main className="mx-auto max-w-md px-5 pt-10 pb-24 md:max-w-none md:px-12 md:pt-36 md:pb-16">
                 <div className="flex flex-col items-center">
                     <img
                         src={usuario.avatar}
                         alt={usuario.nome}
-                        className="h-24 w-24 rounded-full object-cover"
+                        className="h-24 w-24 rounded-full object-cover md:h-40 md:w-40"
                     />
-                    <h1 className="mt-3 text-xl font-bold">{usuario.nome}</h1>
-                    <p className="text-sm text-cinza">{usuario.cidade || "Sem cidade"}</p>
-                    {usuario.bio && <p className="mt-2 text-center text-sm">{usuario.bio}</p>}
+                    <h1 className="mt-3 text-xl font-bold md:mt-5 md:text-4xl">{usuario.nome}</h1>
+                    <p className="text-sm text-cinza md:text-lg">{usuario.cidade || "Sem cidade"}</p>
+                    {usuario.bio && <p className="mt-2 text-center text-sm md:text-base">{usuario.bio}</p>}
                 </div>
 
-                <div className="my-6 grid grid-cols-3 gap-3 rounded-2xl bg-cinza-bg py-4 text-center">
+                <div className="my-6 grid grid-cols-3 gap-3 rounded-2xl bg-cinza-bg py-4 text-center md:mx-auto md:my-10 md:max-w-2xl md:rounded-3xl md:py-8">
                     <div>
-                        <p className="text-lg font-bold">{itens.length}</p>
-                        <p className="text-[11px] text-cinza">Anúncios</p>
+                        <p className="text-lg font-bold md:text-3xl">{itens.length}</p>
+                        <p className="text-[11px] text-cinza md:text-sm">Anúncios</p>
                     </div>
                     <div>
-                        <p className="text-lg font-bold">{totalTrocas}</p>
-                        <p className="text-[11px] text-cinza">Trocas</p>
+                        <p className="text-lg font-bold md:text-3xl">{totalTrocas}</p>
+                        <p className="text-[11px] text-cinza md:text-sm">Trocas</p>
                     </div>
                     <div>
-                        <p className="text-lg font-bold">{totalFavoritos}</p>
-                        <p className="text-[11px] text-cinza">Salvos</p>
+                        <p className="text-lg font-bold md:text-3xl">{totalFavoritos}</p>
+                        <p className="text-[11px] text-cinza md:text-sm">Salvos</p>
                     </div>
                 </div>
 
-                <h2 className="mb-3 font-semibold">Meus itens</h2>
+                <h2 className="mb-3 font-semibold md:mb-5 md:text-xl">Meus itens</h2>
                 {itens.length === 0 ? (
                     <p className="text-sm text-cinza">Você ainda não anunciou nada.</p>
                 ) : (

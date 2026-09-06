@@ -20,11 +20,11 @@ export default async function ListaChat() {
 
     return (
         <>
-            <main className="mx-auto max-w-md px-5 pt-10 pb-24">
-                <h1 className="mb-6 text-2xl font-bold">Mensagens</h1>
+            <main className="mx-auto max-w-md px-5 pt-10 pb-24 md:max-w-3xl md:px-12 md:pt-36 md:pb-16">
+                <h1 className="mb-6 text-2xl font-bold md:mb-8 md:text-4xl">Mensagens</h1>
 
                 {conversas.length === 0 ? (
-                    <p className="text-sm text-cinza">
+                    <p className="py-16 text-center text-sm text-cinza md:py-32 md:text-lg">
                         Nenhuma conversa ainda. Abra um item e toque em Conversar.
                     </p>
                 ) : (
@@ -37,12 +37,12 @@ export default async function ListaChat() {
                                 <Link
                                     key={c.id}
                                     href={`/chat/${c.id}`}
-                                    className="flex items-center gap-3 rounded-2xl p-3 hover:bg-cinza-bg"
+                                    className="flex items-center gap-3 rounded-2xl p-3 hover:bg-cinza-bg md:gap-4 md:p-4"
                                 >
-                                    <img src={outro.avatar} alt="" className="h-12 w-12 rounded-full object-cover" />
+                                    <img src={outro.avatar} alt="" className="h-12 w-12 rounded-full object-cover md:h-16 md:w-16" />
                                     <div className="min-w-0 flex-1">
-                                        <p className="font-medium">{outro.nome}</p>
-                                        <p className="truncate text-xs text-cinza">
+                                        <p className="font-medium md:text-lg">{outro.nome}</p>
+                                        <p className="truncate text-xs text-cinza md:text-sm">
                                             {ultima ? ultima.conteudo : "Diga oi!"}
                                         </p>
                                     </div>
