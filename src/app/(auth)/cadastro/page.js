@@ -29,49 +29,49 @@ export default function Cadastro() {
     }
 
     return (
-        <main className="relative min-h-screen overflow-hidden px-6 pt-40 pb-10">
-            <Blobs />
+        <div className="md:flex md:min-h-screen md:items-center md:justify-center md:bg-cinza-bg">
+            <main className="relative min-h-screen overflow-hidden px-6 pt-40 pb-10 md:min-h-0 md:w-[420px] md:rounded-3xl md:bg-white md:px-8 md:pt-32 md:pb-12 md:shadow-xl">
+                <Blobs />
 
-            <h1 className="text-4xl leading-tight font-bold">
-                Criar
-                <br />
-                conta
-            </h1>
-            <p className="mt-1 mb-8 text-cinza">Comece a trocar hoje mesmo</p>
+                <h1 className="text-4xl leading-tight font-bold">
+                    Criar conta
+                </h1>
+                <p className="mt-1 mb-8 text-cinza">Comece a trocar hoje mesmo</p>
 
-            <Campo
-                label="Nome"
-                value={form.nome}
-                onChange={(e) => setForm({ ...form, nome: e.target.value })}
-            />
-            <Campo
-                label="E-mail"
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-            />
-            <Campo
-                label="Senha"
-                type="password"
-                value={form.senha}
-                onChange={(e) => setForm({ ...form, senha: e.target.value })}
-            />
+                <Campo
+                    label="Nome"
+                    value={form.nome}
+                    onChange={(e) => setForm({ ...form, nome: e.target.value })}
+                />
+                <Campo
+                    label="E-mail"
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                />
+                <Campo
+                    label="Senha"
+                    type="password"
+                    value={form.senha}
+                    onChange={(e) => setForm({ ...form, senha: e.target.value })}
+                />
 
-            {erro && <p className="mb-4 text-sm text-red-500">{erro}</p>}
+                {erro && <p className="mb-4 text-sm text-red-500">{erro}</p>}
 
-            <button
-                onClick={cadastrar}
-                className="w-full rounded-full bg-azul py-4 font-semibold text-white"
-            >
-                Concluir
-            </button>
+                <button
+                    onClick={cadastrar}
+                    className="w-full rounded-full bg-azul py-4 font-semibold text-white"
+                >
+                    Concluir
+                </button>
 
-            <p className="mt-6 text-center text-sm text-cinza">
-                Já tem conta?{" "}
-                <Link href="/login" className="font-semibold text-azul">
-                    Entrar
-                </Link>
-            </p>
-        </main>
-    );
+                <p className="mt-6 text-center text-sm text-cinza">
+                    Já tem conta?{" "}
+                    <Link href="/login" className="font-semibold text-azul">
+                        Entrar
+                    </Link>
+                </p>
+            </main>
+        </div>
+            );
 }

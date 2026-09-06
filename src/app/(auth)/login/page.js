@@ -35,41 +35,42 @@ export default function Login() {
     }
 
     return (
-        <main className="relative min-h-screen overflow-hidden px-6 pt-40 pb-10">
-            <Blobs />
+        <div className="md:flex md:min-h-screen md:items-center md:justify-center md:bg-cinza-bg">
+            <main className="relative min-h-screen overflow-hidden px-6 pt-40 pb-10 md:min-h-0 md:w-[420px] md:rounded-3xl md:bg-white md:px-8 md:pt-32 md:pb-12 md:shadow-xl">
+                <Blobs />
 
-            <h1 className="text-4xl font-bold">Login</h1>
-            <p className="mt-1 mb-8 text-cinza">Que bom te ver de novo 💙</p>
+                <h1 className="text-4xl font-bold">Login</h1>
+                <p className="mt-1 mb-8 text-cinza">Que bom te ver de novo 💙</p>
 
-            <Campo
-                label="E-mail"
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-            />
-            <Campo
-                label="Senha"
-                type="password"
-                value={form.senha}
-                onChange={(e) => setForm({ ...form, senha: e.target.value })}
-            />
+                <Campo
+                    label="E-mail"
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                />
+                <Campo
+                    label="Senha"
+                    type="password"
+                    value={form.senha}
+                    onChange={(e) => setForm({ ...form, senha: e.target.value })}
+                />
 
-            {erro && <p className="mb-4 text-sm text-red-500">{erro}</p>}
+                {erro && <p className="mb-4 text-sm text-red-500">{erro}</p>}
 
-            <button
-                onClick={entrar}
-                disabled={carregando}
-                className="w-full rounded-full bg-azul py-4 font-semibold text-white disabled:opacity-50"
-            >
-                {carregando ? "Entrando..." : "Entrar"}
-            </button>
+                <button
+                    onClick={entrar}
+                    disabled={carregando}
+                    className="w-full rounded-full bg-azul py-4 font-semibold text-white disabled:opacity-50"
+                >
+                    {carregando ? "Entrando..." : "Entrar"}
+                </button>
 
-            <p className="mt-6 text-center text-sm text-cinza">
-                Não tem conta?{" "}
-                <Link href="/cadastro" className="font-semibold text-azul">
-                    Cadastre-se
-                </Link>
-            </p>
-        </main>
-    );
+                <p className="mt-6 text-center text-sm text-cinza">
+                    Não tem conta?{" "}
+                    <Link href="/cadastro" className="font-semibold text-azul">
+                        Cadastre-se
+                    </Link>
+                </p>
+            </main>
+        </div>            );
 }
