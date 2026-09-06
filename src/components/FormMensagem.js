@@ -21,17 +21,17 @@ export default function FormMensagem({ conversaId }) {
     }
 
     return (
-        <div className="flex gap-2 border-t border-gray-100 px-5 py-3">
+        <div className="flex gap-2 border-t border-gray-100 px-5 py-3 md:gap-3 md:px-8 md:py-5">
             <input
                 value={texto}
                 onChange={(e) => setTexto(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && enviar()}
                 placeholder="Mensagem"
-                className="flex-1 rounded-full bg-cinza-bg px-4 py-3 text-sm outline-none"
+                className="flex-1 rounded-full bg-cinza-bg px-4 py-3 text-sm outline-none md:px-6 md:py-4 md:text-base"
             />
             <button
                 onClick={enviar}
-                className="rounded-full bg-azul px-5 text-sm font-semibold text-white"
+                className="rounded-full bg-azul px-5 text-sm font-semibold text-white md:px-8 md:text-base"
             >
                 Enviar
             </button>

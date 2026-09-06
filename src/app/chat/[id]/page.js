@@ -27,14 +27,19 @@ export default async function Conversa({ params }) {
     const outro = conversa.usuarioAId === usuario.id ? conversa.usuarioB : conversa.usuarioA;
 
     return (
-        <div className="mx-auto flex h-screen max-w-md flex-col">
-            <header className="flex items-center gap-3 border-b border-gray-100 px-5 py-4">
-                <Link href="/chat" className="text-cinza">←</Link>
-                <img src={outro.avatar} alt="" className="h-9 w-9 rounded-full object-cover" />
-                <p className="font-semibold">{outro.nome}</p>
+        <div className="mx-auto flex h-screen max-w-md flex-col md:mt-28 md:h-[calc(100vh-9rem)] md:max-w-4xl md:rounded-3xl md:border md:border-gray-100">
+            <header className="flex items-center gap-3 border-b border-gray-100 px-5 py-4 md:gap-5 md:px-8 md:py-6">
+                <Link
+                    href="/chat"
+                    className="flex h-9 w-9 items-center justify-center rounded-full text-cinza hover:bg-cinza-bg md:h-12 md:w-12 md:text-2xl"
+                >
+                    ←
+                </Link>
+                <img src={outro.avatar} alt="" className="h-9 w-9 rounded-full object-cover md:h-14 md:w-14" />
+                <p className="font-semibold md:text-2xl">{outro.nome}</p>
             </header>
 
-            <div className="flex-1 space-y-2 overflow-y-auto px-5 py-4">
+            <div className="flex-1 space-y-2 overflow-y-auto px-5 py-4 md:space-y-3 md:px-8 md:py-6">
                 {conversa.mensagens.map((m) => (
                     <Bolha key={m.id} mensagem={m} minha={m.autorId === usuario.id} />
                 ))}
