@@ -18,11 +18,8 @@ export default function TabBar({ usuario }) {
     return (
         <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-100 bg-white md:top-0 md:bottom-auto md:border-t-0 md:border-b">
             <div className="mx-auto flex max-w-md items-center justify-around px-2 py-2 md:max-w-none md:justify-end md:gap-2 md:px-12 md:py-6">
-                <Link
-                    href="/vitrine"
-                    className="mr-auto hidden text-3xl font-bold text-azul md:block"
-                >
-                    ReUse!
+                <Link href="/vitrine" className="mr-auto hidden md:block">
+                    <img src="/ReUse.svg" alt="ReUse!" className="h-10 w-auto" />
                 </Link>
 
                 {abas.map((aba) => {
