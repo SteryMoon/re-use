@@ -11,12 +11,19 @@ const abas = [
     { href: "/perfil", label: "Perfil", icone: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21c0-4 3.6-6 8-6s8 2 8 6" },
 ];
 
-export default function TabBar() {
+export default function TabBar({ usuario }) {
     const caminho = usePathname();
 
     return (
-        <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-100 bg-white">
-            <div className="mx-auto flex max-w-md justify-around px-2 py-2">
+        <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-100 bg-white md:top-0 md:bottom-auto md:border-t-0 md:border-b">
+            <div className="mx-auto flex max-w-md items-center justify-around px-2 py-2 md:max-w-6xl md:justify-end md:gap-1 md:px-8 md:py-3">
+                <Link
+                    href="/vitrine"
+                    className="mr-auto hidden text-2xl font-bold text-azul md:block"
+                >
+                    ReUse!
+                </Link>
+
                 {abas.map((aba) => {
                     const ativa = caminho === aba.href || caminho.startsWith(aba.href + "/");
 
@@ -24,7 +31,9 @@ export default function TabBar() {
                         <Link
                             key={aba.href}
                             href={aba.href}
-                            className={`flex flex-1 flex-col items-center gap-1 rounded-xl py-1 text-[10px] ${ativa ? "text-azul" : "text-cinza"
+                            className={`flex flex-1 flex-col items-center gap-1 rounded-xl py-1 text-[10px] md:flex-none md:flex-row md:gap-2 md:rounded-full md:px-4 md:py-2 md:text-sm ${ativa
+                                ? "text-azul md:bg-azul-suave"
+                                : "text-cinza md:hover:bg-cinza-bg"
                                 }`}
                         >
                             <svg
@@ -36,6 +45,7 @@ export default function TabBar() {
                                 strokeWidth="1.8"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
+                                className="md:h-5 md:w-5"
                             >
                                 <path d={aba.icone} />
                             </svg>
@@ -43,6 +53,22 @@ export default function TabBar() {
                         </Link>
                     );
                 })}
+
+                {usuario && (
+                    <div className="ml-4 hidden items-center gap-3 md:flex">
+                        <Link
+                            href="/novo"
+                            className="rounded-full bg-azul px-5 py-2 text-sm font-semibold text-white"
+                        >
+                            + Anunciar
+                        </Link>
+                        <img
+                            src={usuario.avatar}
+                            alt={usuario.nome}
+                            className="h-10 w-10 rounded-full object-cover"
+                        />
+                    </div>
+                )}
             </div>
         </nav>
     );

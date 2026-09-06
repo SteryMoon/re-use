@@ -27,13 +27,13 @@ export default async function Vitrine() {
 
     return (
         <>
-            <main className="mx-auto max-w-md px-5 pt-8 pb-24">
-                <header className="mb-6 flex items-center justify-between">
+            <main className="mx-auto max-w-md px-5 pt-8 pb-24 md:max-w-none md:px-12 md:pt-28 md:pb-16">
+                <header className="mb-6 flex items-center justify-between md:mb-10">
                     <div>
-                        <p className="text-sm text-cinza">Olá,</p>
-                        <h1 className="text-2xl font-bold">{usuario.nome.split(" ")[0]}!</h1>
+                        <p className="text-sm text-cinza md:text-base">Olá,</p>
+                        <h1 className="text-2xl font-bold md:text-5xl">{usuario.nome.split(" ")[0]}!</h1>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 md:hidden">
                         <Link
                             href="/novo"
                             className="flex h-11 w-11 items-center justify-center rounded-full bg-azul text-xl text-white"
@@ -52,22 +52,20 @@ export default async function Vitrine() {
                 <Categorias categorias={categorias} />
 
                 <section>
-                    <h2 className="mb-3 font-semibold">Disponíveis para troca</h2>
+                    <h2 className="mb-3 font-semibold md:mb-5 md:text-xl">Disponíveis para troca</h2>
                     {itens.length === 0 ? (
                         <p className="text-sm text-cinza">
                             Nenhum item ainda. Rode o seed para popular o banco.
                         </p>
                     ) : (
-                        <div className="grid grid-cols-2 gap-4">
-                            {itens.map((item) => (
-                                <CardItem key={item.id} item={item} />
-                            ))}
+                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">                            {itens.map((item) => (
+                            <CardItem key={item.id} item={item} />
+                        ))}
                         </div>
                     )}
                 </section>
             </main>
 
-            <TabBar />
-        </>
+            <TabBar usuario={usuario} />        </>
     );
 }

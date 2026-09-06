@@ -14,7 +14,7 @@ export default function BotaoSair() {
     return (
         <button
             onClick={sair}
-            className="mt-8 w-full rounded-full border border-gray-200 py-3 text-sm font-semibold text-cinza"
+            className="mt-8 w-full rounded-full border border-gray-200 py-3 text-sm font-semibold text-cinza md:mx-auto md:block md:w-64"
         >
             Sair da conta
         </button>

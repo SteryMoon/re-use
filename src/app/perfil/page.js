@@ -64,7 +64,7 @@ export default async function Perfil() {
                 <BotaoSair />
             </main>
 
-            <TabBar />
+            <TabBar usuario={usuario} />
         </>
     );
 }

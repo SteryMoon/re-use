@@ -15,7 +15,7 @@ export default async function Favoritos() {
 
     return (
         <>
-            <main className="mx-auto max-w-md px-5 pt-10 pb-24">
+            <main className="mx-auto max-w-md px-5 pt-10 pb-24 md:max-w-4xl md:px-8 md:pt-28 md:pb-10">
                 <h1 className="mb-6 text-2xl font-bold">Salvos</h1>
 
                 {favoritos.length === 0 ? (
@@ -23,15 +23,14 @@ export default async function Favoritos() {
                         Você ainda não salvou nenhum item. Toque no coração de um anúncio.
                     </p>
                 ) : (
-                    <div className="grid grid-cols-2 gap-4">
-                        {favoritos.map((fav) => (
-                            <CardItem key={fav.id} item={fav.item} />
-                        ))}
+                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">                        {favoritos.map((fav) => (
+                        <CardItem key={fav.id} item={fav.item} />
+                    ))}
                     </div>
                 )}
             </main>
 
-            <TabBar />
+            <TabBar usuario={usuario} />
         </>
     );
 }

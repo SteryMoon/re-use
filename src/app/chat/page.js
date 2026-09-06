@@ -53,7 +53,7 @@ export default async function ListaChat() {
                 )}
             </main>
 
-            <TabBar />
+            <TabBar usuario={usuario} />
         </>
     );
 }

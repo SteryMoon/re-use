@@ -32,40 +32,39 @@ export default async function Propostas() {
                 {propostas.length === 0 ? (
                     <p className="text-sm text-cinza">Nenhuma proposta por enquanto.</p>
                 ) : (
-                    <div className="space-y-4">
-                        {propostas.map((p) => {
-                            const souDono = p.donoId === usuario.id;
+                    <div className="space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0">                        {propostas.map((p) => {
+                        const souDono = p.donoId === usuario.id;
 
-                            return (
-                                <div key={p.id} className="rounded-2xl border border-gray-100 p-4">
-                                    <div className="mb-3 flex items-center justify-between">
-                                        <span className="text-xs text-cinza">
-                                            {souDono ? `${p.solicitante.nome} propôs` : "Você propôs"}
-                                        </span>
-                                        <span className={`rounded-full px-2 py-1 text-[10px] font-semibold ${cores[p.status]}`}>
-                                            {p.status}
-                                        </span>
-                                    </div>
-
-                                    <div className="flex items-center gap-3">
-                                        <img src={p.itemOferecido.imagem} alt="" className="h-16 w-16 rounded-xl object-cover" />
-                                        <span className="text-cinza">⇄</span>
-                                        <img src={p.itemDesejado.imagem} alt="" className="h-16 w-16 rounded-xl object-cover" />
-                                    </div>
-
-                                    <p className="mt-2 text-xs text-cinza">
-                                        {p.itemOferecido.titulo} por {p.itemDesejado.titulo}
-                                    </p>
-
-                                    {souDono && p.status === "pendente" && <AcaoProposta id={p.id} />}
+                        return (
+                            <div key={p.id} className="rounded-2xl border border-gray-100 p-4">
+                                <div className="mb-3 flex items-center justify-between">
+                                    <span className="text-xs text-cinza">
+                                        {souDono ? `${p.solicitante.nome} propôs` : "Você propôs"}
+                                    </span>
+                                    <span className={`rounded-full px-2 py-1 text-[10px] font-semibold ${cores[p.status]}`}>
+                                        {p.status}
+                                    </span>
                                 </div>
-                            );
-                        })}
+
+                                <div className="flex items-center gap-3">
+                                    <img src={p.itemOferecido.imagem} alt="" className="h-16 w-16 rounded-xl object-cover" />
+                                    <span className="text-cinza">⇄</span>
+                                    <img src={p.itemDesejado.imagem} alt="" className="h-16 w-16 rounded-xl object-cover" />
+                                </div>
+
+                                <p className="mt-2 text-xs text-cinza">
+                                    {p.itemOferecido.titulo} por {p.itemDesejado.titulo}
+                                </p>
+
+                                {souDono && p.status === "pendente" && <AcaoProposta id={p.id} />}
+                            </div>
+                        );
+                    })}
                     </div>
                 )}
             </main>
 
-            <TabBar />
+            <TabBar usuario={usuario} />
         </>
     );
 }

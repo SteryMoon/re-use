@@ -10,8 +10,8 @@ export default function CardItem({ item }) {
                     className="h-full w-full object-cover"
                 />
             </div>
-            <p className="mt-2 truncate text-sm font-medium">{item.titulo}</p>
-            <p className="text-xs text-cinza">{item.categoria.nome}</p>
+            <p className="mt-2 truncate text-sm font-medium md:mt-3 md:text-lg">{item.titulo}</p>
+            <p className="text-xs text-cinza md:text-sm">{item.categoria.nome}</p>
         </Link>
     );
 }
