@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+
 const abas = [
     { href: "/vitrine", label: "Início", icone: "M3 10.5 12 3l9 7.5M5 9.5V20h14V9.5" },
     { href: "/favoritos", label: "Salvos", icone: "M12 20s-7-4.6-7-9.5A3.8 3.8 0 0 1 12 8a3.8 3.8 0 0 1 7 2.5c0 4.9-7 9.5-7 9.5Z" },
