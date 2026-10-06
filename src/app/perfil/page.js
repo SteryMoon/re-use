@@ -4,6 +4,7 @@ import { usuarioLogado } from "@/lib/session";
 import TabBar from "@/components/TabBar";
 import CardItem from "@/components/CardItem";
 import BotaoSair from "@/components/BotaoSair";
+import BotaoPausar from "@/components/BotaoPausar";
 
 export default async function Perfil() {
     const usuario = await usuarioLogado();
@@ -51,6 +52,7 @@ export default async function Perfil() {
                 </div>
 
                 <h2 className="mb-3 font-semibold md:mb-5 md:text-xl">Meus itens</h2>
+                <BotaoPausar temAtivos={itens.some((i) => i.status === "disponivel")} />
                 {itens.length === 0 ? (
                     <p className="text-sm text-cinza">Você ainda não anunciou nada.</p>
                 ) : (
